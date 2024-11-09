@@ -1,10 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './Card.css';
+import './Card.module.css';
 
 function Card({ id, descripcion, costo, onActivityDeleted }) { 
-
-
   const deleteActivity = async () => {
       try {
           const response = await fetch(`http://localhost:8000/actividades/${id}`, {
