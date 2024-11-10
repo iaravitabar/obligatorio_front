@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Card from '../components/Card';
-import '../Styles/Home.module.css';
+import styles from '../Styles/Home.module.css';
 
 function Home() {
   const [activity, setActivity] = useState([]);
@@ -24,20 +24,22 @@ function Home() {
   }, []);
 
   return (
-    <div className="home-container">
+    <div className={styles.homeContainer}>
       <h1>Bienvenido a la API de la Escuela de Deportes de Nieve</h1>
       <h2>Actividades</h2>
 
-      <div className="activity-list">
+      <div className={styles.activityList}>
         {activity.length > 0 ? (
           activity.map((activityItem) => (
-            <Card
-              key={activityItem.id}
-              id={activityItem.id}
-              descripcion={activityItem.descripcion}
-              costo={activityItem.costo}
-              onActivityDeleted={() => setActivity(activity.filter(g => g.id !== activityItem.id))}
-            />
+            <div className={styles.activityCard} key={activityItem.id}>
+              <Card
+                key={activityItem.id}
+                id={activityItem.id}
+                emoji={activityItem.emoji}
+                descripcion={activityItem.descripcion}
+                costo={activityItem.costo}
+              />
+            </div>
           ))
         ) : (
           <p>No se encontraron actividades.</p>

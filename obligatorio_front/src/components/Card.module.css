@@ -1,43 +1,53 @@
-.card {
+.Card {
+  width: 100%; 
+  padding: 20px;
   border: 1px solid #ccc;
-  padding: 16px;
-  margin: 10px;
-  width: 180px;
-  text-align: center;
   border-radius: 10px;
   background-color: #f9f9f9;
-  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.2s;
 }
 
-.card h2,h3,h4 {
+.Card:hover {
+  transform: translateY(-5px);
+}
+
+.Card h2 {
+  font-size: 1.5rem; 
+  font-weight: bold;
+  font-family: 'Montserrat', sans-serif;; 
+  margin-bottom: 8px;
+  color: #333; 
+}
+
+.Card h3 {
   font-size: 18px;
   margin-bottom: 10px;
 }
 
-button {
-  display: block;
-  width: 100%;
+.detailsBtn, .inscriptionBtn {
+  width: 100%; 
   margin-top: 10px;
-  padding: 8px;
+  padding: 10px;
   border: none;
-  background-color:#2125ae;
   color: white;
   border-radius: 5px;
   cursor: pointer;
 }
 
-button:hover {
-  background-color: #2125ae;
+.detailsBtn {
+  background-color: #3498db;
 }
 
-button:focus {
-  outline: none;
-}
-
-.details-btn {
-  margin-bottom: 8px;
+.detailsBtn:hover {
   background-color: #56a8eb;
 }
-.details-btn:hover{
+
+.inscriptionBtn {
   background-color: #2125ae;
+}
+
+.inscriptionBtn:hover {
+  background-color: #383ed9;
 }

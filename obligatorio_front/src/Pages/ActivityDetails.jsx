@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import '../Styles/ActivityDetails.module.css';
+import styles from '../Styles/ActivityDetails.module.css';
 
 const ActivityDetails = () => {
   const { id } = useParams();
@@ -12,6 +12,7 @@ const ActivityDetails = () => {
       try {
         const response = await fetch(`http://localhost:8000/actividades/${id}`);
         const data = await response.json();
+        console.log("Datos de la actividad:", data);
         setActivity(data);
       } catch (error) {
         console.error("Error al obtener detalles de la actividad:", error);
@@ -28,7 +29,8 @@ const ActivityDetails = () => {
   }
 
   return (
-    <div className="details-container">
+    <div className={styles.detailsContainer}>
+      <h1>{activity.emoji}</h1>
       <h2>{activity.descripcion}</h2>
       <p>Costo: ${activity.costo}</p>
       <p>Turno Matutino: {"09:00:00 - 11:00:00"}</p>
@@ -37,7 +39,7 @@ const ActivityDetails = () => {
       <p>Requisitos de edad: {"mayores de 18 años"}</p>
       {/* <button onClick={handleEnroll}>Inscribirse</button> */}
       <Link to="/Home">
-            <button className="btn-atras">Atrás</button>
+            <button className={styles.detailsBtn}>Atrás</button>
       </Link>
     </div>
   );
