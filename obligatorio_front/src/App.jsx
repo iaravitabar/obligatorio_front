@@ -18,6 +18,7 @@ function App() {
         <Route path="/actividades/:id" element={<ActivityDetails />} />
         <Route path="/CrearClase" element={<CreateClass />} />
         <Route path="/inscripciones" element={<InscriptionForm />} />
+        <Route path="/VerClasses" element={<VerClasses />} />
       </Routes>
     </Router>
   );
