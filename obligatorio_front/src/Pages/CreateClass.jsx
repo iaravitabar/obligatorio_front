@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Styles from '../Styles/Inscriptions.module.css';
+import { Link } from "react-router-dom";
+import Styles from '../Styles/CreateClass.module.css';
 
-const Inscriptions = () => {
+const CreateClass = () => {
   const [instructors, setInstructors] = useState([]);
   const [activities, setActivities] = useState([]);
   const [shifts, setShifts] = useState([]);
@@ -63,6 +64,7 @@ const Inscriptions = () => {
     const minutes = str.slice(-4, -2); // Extrae los minutos
     return `${hours.padStart(2, "0")}:${minutes.padStart(2, "0")}`; // Formatea como HH:MM
   };
+  
 
   return (
     <div>
@@ -124,9 +126,12 @@ const Inscriptions = () => {
 
         <button type="submit">Crear Clase</button>
       </form>
-      {message && <p>{message}</p>}
+      {message && <pe>{message}</pe>}
+      <Link to="/Home">
+            <button className={Styles.detailsBtn}>Atrás</button>
+      </Link>
     </div>
   );
 };
 
-export default Inscriptions;
+export default CreateClass;

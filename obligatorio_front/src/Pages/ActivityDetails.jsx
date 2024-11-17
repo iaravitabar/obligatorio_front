@@ -46,7 +46,7 @@ const ActivityDetails = () => {
       <p>Requisitos de edad: {"mayores de 18 años"}</p>
       {/* <button onClick={handleEnroll}>Inscribirse</button> */}
       <Link to="/Home">
-            <button className={styles.detailsBtn}>Atrás</button>
+        <button className={styles.detailsBtn}>Atrás</button>
       </Link>
     </div>
   );

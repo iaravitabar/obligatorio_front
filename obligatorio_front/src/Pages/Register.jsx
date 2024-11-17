@@ -4,8 +4,8 @@ import styles from '../styles/Register.module.css';
 
 const Register = () => {
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [username, setUsername] = useState('');
+  const [nombre, setNombre] = useState('');
+  const [apellido, setApellido] = useState('');
   const [birthday, setBirthday] = useState('');
   const [telephone, setTelephone] = useState('');
   const [ci, setCi] = useState('');
@@ -14,17 +14,13 @@ const Register = () => {
   const navigate = useNavigate();
 
   const validateForm = () => {
-    if (!email || !password || !username) {
+    if (!email || !ci || !nombre || !birthday || !telephone) {
       setError('Por favor, completa todos los campos');
       return false;
     }
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
       setError('Ingresa un email válido');
-      return false;
-    }
-    if (password.length < 6) {
-      setError('La contraseña debe tener al menos 6 caracteres');
       return false;
     }
     return true;
@@ -36,12 +32,19 @@ const Register = () => {
     if (!validateForm()) return;
 
     try {
-      const response = await fetch('/api/register', {
+      const response = await fetch('http://localhost:8000/alumnos/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ email, password, username }),
+        body: JSON.stringify({
+          ci,
+          nombre: nombre,
+          apellido: apellido,
+          correo: email,
+          telefono: telephone,
+          fecha_nacimiento: birthday,
+        }),
       });
 
       const data = await response.json();
@@ -49,10 +52,10 @@ const Register = () => {
       if (response.ok) {
         setSuccess(true);
         setTimeout(() => {
-          navigate('/login');
+          navigate('/Home');
         }, 2000);
       } else {
-        setError(data.message || 'Ocurrió un error en el registro');
+        setError(data.detail || 'Ocurrió un error en el registro');
       }
     } catch (error) {
       setError('Error de servidor. Intenta más tarde.');
@@ -74,18 +77,26 @@ const Register = () => {
       <form className={styles.form} onSubmit={handleSubmit}>
         <input
           type="text"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          placeholder="Nombre de usuario"
+          value={nombre}
+          onChange={(e) => setNombre(e.target.value)}
+          placeholder="Nombre"
           className={styles.input}
           required
         />
         <input
-          type = "text"
-          value = {ci}
-          onChange = {(e) => setCi(e.target.value)}
-          placeholder = "Cédula de identidad"
-          className = {styles.input}
+          type="text"
+          value={apellido}
+          onChange={(e) => setApellido(e.target.value)}
+          placeholder="Apellido"
+          className={styles.input}
+          required
+        />
+        <input
+          type="text"
+          value={ci}
+          onChange={(e) => setCi(e.target.value)}
+          placeholder="Cédula de identidad"
+          className={styles.input}
           required
         />
         <input
@@ -97,27 +108,19 @@ const Register = () => {
           required
         />
         <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          placeholder="Contraseña"
+          type="text"
+          value={telephone}
+          onChange={(e) => setTelephone(e.target.value)}
+          placeholder="Teléfono"
           className={styles.input}
           required
         />
+        <label>Fecha de nacimiento:</label>
         <input
-          type = "text"
-          value = {telephone}
-          onChange = {(e) => setTelephone(e.target.value)}
-          placeholder = "Teléfono"
-          className = {styles.input}
-          required
-        />
-        <input
-          type = "date"
-          value = {birthday}
-          onChange = {(e) => setBirthday(e.target.value)}
-          placeholder = "Fecha de nacimiento"
-          className = {styles.input}
+          type="date"
+          value={birthday}
+          onChange={(e) => setBirthday(e.target.value)}
+          className={styles.input}
           required
         />
         <button type="submit" className={styles.button}>Registrar</button>

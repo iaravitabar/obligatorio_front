@@ -26,7 +26,7 @@ function Home() {
       <h1>Bienvenido a la API de la Escuela de Deportes de Nieve</h1>
       <h2>Actividades</h2>
 
-      <Link to="/inscriptions">
+      <Link to="/CrearClase">
         <button className={styles.inscriptionButton}>Crear Clase</button>
       </Link>
       

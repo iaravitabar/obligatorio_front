@@ -5,43 +5,44 @@ function Login() {
   const [error, setError] = useState('')
 
   const validateForm = (e) => {
-    if (!e.target.email.value || !e.target.password.value) {
-      return 'Por favor, completa todos los campos';
+    if (!e.target.ci.value ) {
+      return 'Por favor, completa los campos';
     }
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(e.target.email.value)) {
-      return 'Ingresa un email válido';
+    const ciRegex = /^[0-9]{6,8}$/;
+    if (!ciRegex.test(e.target.email.value)) {
+      return 'Ingresa una cedula válida';
     }
-    if (e.target.password.value.length < 6) {
-      return 'La contraseña debe tener al menos 6 caracteres';
+    if (e.target.ci.value.length < 6) {
+      return 'La cedula debe tener al menos 8 caracteres';
     }
     return '';
   };
 
-  function handleSubmit(e){
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const validationError = validateForm(e);
-    if (validationError) {
-      setError(validationError);
-      return alert(validationError);
-    }
-
-    let data = {email: e.target.email.value, password: e.target.password.value}
-    login(data).then((res) => {
-      if (res.error) {
-        setError(res.error);
-        return alert(res.error);
+    setError('');
+    
+    try {
+      const response = await fetch('http://localhost:8000/login/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ ci: e.target.ci.value }), 
+      });
+  
+      const data = await response.json();
+  
+      if (response.ok) {
+        document.cookie = `token=${data.token}; max-age=3600; path=/`;
+        window.location.href = '/Home'; // Redirige al feed o página principal
       } else {
-        let {_id, token } = res
-        document.cookie = `token=${token}; max-age=3600; path=/`;
-
-        window.location.href = '/feed';
-      }}).catch((error) => {
-        setError('An unexpected error occurred');
-        alert('An unexpected error occurred');
-    });
-  }
-
+        setError(data.detail || 'Credenciales incorrectas');
+      }
+    } catch (error) {
+      setError('Error de servidor. Intenta más tarde.');
+    }
+  };
   return (
     <>
     <div className={styles.login_container}>
@@ -55,19 +56,11 @@ function Login() {
       <h1 className={styles.title}>Inicia Sesión</h1>
       <form className={styles.login_form} onSubmit={handleSubmit}>
         <input
-          type="email"
-          placeholder="email"
-          id="email"
+          type="ci"
+          placeholder="ci"
+          id="ci"
           className={styles.login_input}
         />
-        <br />
-        <input
-          type="password"
-          placeholder="password"
-          id="password"
-          className={styles.login_input}
-        />
-        <br />
         <button type="submit" className={styles.login_button}>Login</button>
       </form>
       <p className={styles.login_text}>

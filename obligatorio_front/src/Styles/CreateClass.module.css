@@ -73,11 +73,26 @@ body {
   }
   
   /* Mensaje */
-  p {
+  pe {
     margin-top: 15px;
     text-align: center;
     color: green;
     font-weight: bold;
+  }
+
+  .detailsBtn {
+    width: 50%; 
+    margin-top: 10px;
+    padding: 5px;
+    border: none;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #1a237e; 
+  }
+  
+  .detailsBtn:hover {
+    background-color: #3949ab; 
   }
   
   /* Adaptabilidad para pantallas pequeñas */
