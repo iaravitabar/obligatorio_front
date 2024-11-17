@@ -8,17 +8,24 @@ const ActivityDetails = () => {
   const [activity, setActivity] = useState(null);
 
   useEffect(() => {
-    const fetchActivityDetails = async () => {
-      try {
-        const response = await fetch(`http://localhost:8000/actividades/${id}`);
-        const data = await response.json();
-        console.log("Datos de la actividad:", data);
-        setActivity(data);
-      } catch (error) {
-        console.error("Error al obtener detalles de la actividad:", error);
-      }
-    };
-    fetchActivityDetails();
+    fetch(`http://localhost:8000/actividades/${id}`)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Error al obtener la actividad");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        // hay que pasar el array en un objeto, aca lo hice
+        const actividadTransformada = {
+          id: data[0],
+          descripcion: data[1],
+          costo: data[2],
+          emoji: data[3],
+        };
+        setActivity(actividadTransformada);
+      })
+      .catch((error) => console.error(error));
   }, [id]);
   // const handleEnroll = () => {
   //   alert('¡Inscripción exitosa!');
