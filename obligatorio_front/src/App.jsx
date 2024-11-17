@@ -5,8 +5,8 @@ import ActivityDetails from './Pages/ActivityDetails';
 import Login from './Pages/Login';
 import './App.css';
 import Register from './Pages/Register';
-import Inscriptions from './Pages/CreateClass';
 import CreateClass from './Pages/CreateClass';
+import InscriptionForm from './Pages/InscriptionForm';
 
 function App() {
   return (
@@ -17,6 +17,7 @@ function App() {
         <Route path="/home" element={<Home />} />
         <Route path="/actividades/:id" element={<ActivityDetails />} />
         <Route path="/CrearClase" element={<CreateClass />} />
+        <Route path="/inscripciones" element={<InscriptionForm />} />
       </Routes>
     </Router>
   );

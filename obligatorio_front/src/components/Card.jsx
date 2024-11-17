@@ -13,7 +13,7 @@ function Card({ id, descripcion, costo, emoji}) {
           <Link to={`/actividades/${id}`}>
           <button className={styles.detailsBtn}>Detalles</button>
           </Link>
-            <Link to={`/actividades/${id}`}> 
+            <Link to={`/inscripciones`}> 
             {/* tiene que redirigiar al post de clase pa inscribirse */}
             <button className={styles.inscriptionBtn}>Incsribirse</button> 
             </Link>
