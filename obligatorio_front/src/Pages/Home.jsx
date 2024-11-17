@@ -29,6 +29,10 @@ function Home() {
       <Link to="/CrearClase">
         <button className={styles.inscriptionButton}>Crear Clase</button>
       </Link>
+
+      <Link to="/Clases">
+        <button className={styles.inscriptionButton}>Ver Clases</button>
+      </Link>
       
 
       <div className={styles.activityList}>
