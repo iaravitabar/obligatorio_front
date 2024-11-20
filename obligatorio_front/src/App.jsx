@@ -8,6 +8,7 @@ import Register from './Pages/Register';
 import CreateClass from './Pages/CreateClass';
 import InscriptionForm from './Pages/InscriptionForm';
 import Classes from './Pages/Classes';
+import ModifyClasses from './Pages/ModifyClasses';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path="/CrearClase" element={<CreateClass />} />
         <Route path="/inscripciones" element={<InscriptionForm />} />
         <Route path="/Clases" element={<Classes />} />
+        <Route path="/ModificarClase" element={<ModifyClasses />} />
       </Routes>
     </Router>
   );

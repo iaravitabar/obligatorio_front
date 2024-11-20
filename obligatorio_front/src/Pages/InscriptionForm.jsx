@@ -54,26 +54,28 @@ const InscriptionForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+  
     const payload = {
-      ci_alumno: ciAlumno,
+      alumnos: [ciAlumno], // Lista de alumnos
       id_actividad: parseInt(formData.id_actividad),
       ci_instructor: formData.ci_instructor,
-      id_equipamiento: formData.id_equipamiento ? parseInt(formData.id_equipamiento) : null,
-      id_turno: parseInt(formData.id_turno), // Usamos directamente el ID del turno
+      id_equipamiento: formData.id_equipamiento
+        ? parseInt(formData.id_equipamiento)
+        : null, // Envía null si no hay equipamiento
+      id_turno: parseInt(formData.id_turno),
     };
-    console.log('Datos enviados:', payload);
+  
+    console.log("Payload enviado:", payload);
+  
     try {
-      const response = await axios.post('http://localhost:8000/inscripciones/', payload);
-      console.log('Respuesta del backend:', response.data);
+      const response = await axios.post("http://localhost:8000/inscripciones/", payload);
+      console.log("Respuesta del backend:", response.data);
       setMensaje(response.data.message);
-      setError('');
+      setError("");
     } catch (err) {
-      console.error('Error al inscribirse:', err);
-      if (err.response) {
-        console.error('Respuesta del servidor:', err.response.data);
-      }
-      setError(err.response?.data?.detail || 'Error al inscribirse');
-      setMensaje('');
+      console.error("Error al inscribirse:", err);
+      setError(err.response?.data?.detail || "Error al inscribirse");
+      setMensaje("");
     }
   };
 

@@ -33,6 +33,10 @@ function Home() {
       <Link to="/Clases">
         <button className={styles.inscriptionButton}>Ver Clases</button>
       </Link>
+
+      <Link to="/ModificarClase">
+        <button className={styles.inscriptionButton}>Modificar Clases</button>
+      </Link>
       
 
       <div className={styles.activityList}>
